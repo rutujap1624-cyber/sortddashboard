@@ -2619,15 +2619,19 @@ function asgGetTog(cls){
   return btn?btn.textContent.trim():'';
 }
 
-async function asgSaveToSheets(tab,row){
-  if(!ASG_GAS_URL||ASG_GAS_URL.includes('YOUR_'))return;
+async function asgSaveToSheets(tab, row){
+  if(!ASG_GAS_URL || ASG_GAS_URL.includes('YOUR_')) return;
   try{
-    await fetch(ASG_GAS_URL,{
-      method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'text/plain'},
-      body:JSON.stringify({tab,row,keyCol:'ID'})
+    await fetch(ASG_GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain'},
+      body: JSON.stringify({tab, row, keyCol: 'ID'})
     });
-  }catch(e){console.error('ASG Sheets error:',e);throw e;}
+  } catch(e){
+    console.error('ASG Sheets error:', e);
+    throw e;
+  }
 }
 
 // ── SORTD ↔ ASG INTERNAL CONNECTION ────────
