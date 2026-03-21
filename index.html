@@ -2589,7 +2589,7 @@ setTimeout(runMorningBriefing, 1500);
 // ASG BUSINESS OS — DATA & FUNCTIONS
 // ════════════════════════════════════════════
 
-const ASG_GAS_URL = 'https://script.google.com/macros/s/AKfycbyI8mYR5kQ1fWEFHqgBjEPSI0mvJIG2QEIiy9TMcdYsAu_JBIi4fiwkhwTbYN9MOqDBWA/exec';
+const ASG_GAS_URL = 'https://script.google.com/macros/s/AKfycbztIkKO6I2z34MrrpDz82KkQe_-7aGwNsUULZUJr7nE41bB_CEE4SSsHZHzouIJ0Gbohw/exec';
 
 // ── ASG DATA (separate localStorage keys) ──
 let asgCampaigns = JSON.parse(localStorage.getItem('asg_campaigns') || '[]');
@@ -2622,14 +2622,12 @@ function asgGetTog(cls){
 async function asgSaveToSheets(tab, row){
   if(!ASG_GAS_URL || ASG_GAS_URL.includes('YOUR_')) return;
   try{
-    // Use URL params via GET — bypasses no-cors body parsing issues completely
-    const payload = encodeURIComponent(JSON.stringify({tab, row, keyCol: 'ID'}));
-    const script = document.createElement('script');
-    const cb = '_asg_save_' + Date.now();
-    window[cb] = function(){ delete window[cb]; script.remove(); };
-    script.src = ASG_GAS_URL + '?action=write&payload=' + payload + '&callback=' + cb;
-    document.head.appendChild(script);
-    setTimeout(()=>{ if(window[cb]){ delete window[cb]; script.remove(); }}, 5000);
+    // Use exact same format as Sortd — this is what the Sortd-based Apps Script expects
+    await fetch(ASG_GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify({ action: 'sync', sheet: tab, data: [row] })
+    });
   } catch(e){
     console.error('ASG Sheets error:', e);
     throw e;
