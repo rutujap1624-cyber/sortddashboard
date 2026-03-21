@@ -2622,12 +2622,14 @@ function asgGetTog(cls){
 async function asgSaveToSheets(tab, row){
   if(!ASG_GAS_URL || ASG_GAS_URL.includes('YOUR_')) return;
   try{
-    await fetch(ASG_GAS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {'Content-Type': 'text/plain'},
-      body: JSON.stringify({tab, row, keyCol: 'ID'})
-    });
+    // Use URL params via GET — bypasses no-cors body parsing issues completely
+    const payload = encodeURIComponent(JSON.stringify({tab, row, keyCol: 'ID'}));
+    const script = document.createElement('script');
+    const cb = '_asg_save_' + Date.now();
+    window[cb] = function(){ delete window[cb]; script.remove(); };
+    script.src = ASG_GAS_URL + '?action=write&payload=' + payload + '&callback=' + cb;
+    document.head.appendChild(script);
+    setTimeout(()=>{ if(window[cb]){ delete window[cb]; script.remove(); }}, 5000);
   } catch(e){
     console.error('ASG Sheets error:', e);
     throw e;
