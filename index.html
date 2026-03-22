@@ -942,8 +942,9 @@ select.inp { cursor: pointer; }
 
     <!-- ════════════ ASG DASHBOARD ════════════ -->
     <div class="page" id="page-asg-dashboard">
-      <div class="asg-conn"><strong>ASG Business OS.</strong> Your business data alongside your tasks. Everything connected — tasks tagged with ASG categories appear in the right section.</div>
-      <div class="asg-g3">
+
+      <!-- KPI ROW -->
+      <div class="asg-g3" style="margin-bottom:12px">
         <div class="asg-mc"><div class="asg-mc-val" id="asg-d-revenue">₹0</div><div class="asg-mc-lbl">Revenue</div></div>
         <div class="asg-mc"><div class="asg-mc-val" id="asg-d-roas">0x</div><div class="asg-mc-lbl">ROAS</div></div>
         <div class="asg-mc"><div class="asg-mc-val" id="asg-d-orders">0</div><div class="asg-mc-lbl">Orders</div></div>
@@ -951,32 +952,73 @@ select.inp { cursor: pointer; }
         <div class="asg-mc"><div class="asg-mc-val" id="asg-d-conv">0%</div><div class="asg-mc-lbl">Conv%</div></div>
         <div class="asg-mc"><div class="asg-mc-val" id="asg-d-cac">₹0</div><div class="asg-mc-lbl">CAC</div></div>
       </div>
+
+      <!-- TODAY'S TASKS from Sortd -->
       <div class="asg-card">
-        <div class="asg-ct">Channel Performance</div>
-        <div id="asg-channel-snap"><div class="asg-empty">Add campaign data to see breakdown.</div></div>
+        <div class="asg-ct" style="display:flex;justify-content:space-between;align-items:center">
+          <span>⚡ Today's ASG Tasks</span>
+          <button class="asg-abtn" onclick="nav('dump',document.querySelector('.nav-btn'))" style="font-size:11px;padding:4px 10px">+ Add Task</button>
+        </div>
+        <div id="asg-today-tasks"><div class="asg-empty">No tasks scheduled today.</div></div>
       </div>
+
+      <!-- CHANNEL PERFORMANCE -->
       <div class="asg-card">
-        <div class="asg-ct">ASG Tasks in Sortd right now</div>
-        <div id="asg-linked-tasks"><div class="asg-empty">Tasks tagged with ASG categories show here.</div></div>
+        <div class="asg-ct" style="display:flex;justify-content:space-between;align-items:center">
+          <span>📈 Campaign Performance</span>
+          <button class="asg-abtn" onclick="nav('asg-campaigns',document.querySelector('[onclick*=asg-campaigns]'))" style="font-size:11px;padding:4px 10px">+ Log</button>
+        </div>
+        <div id="asg-channel-snap"><div class="asg-empty">No campaign data yet.</div></div>
       </div>
+
+      <!-- CONTENT DUE THIS WEEK -->
       <div class="asg-card">
-        <div class="asg-ct">Activity</div>
-        <div class="asg-row"><span class="asg-row-l">Content pieces this month</span><span class="asg-row-v" id="asg-d-content">0</span></div>
-        <div class="asg-row"><span class="asg-row-l">Active people / collabs</span><span class="asg-row-v" id="asg-d-people">0</span></div>
-        <div class="asg-row"><span class="asg-row-l">Open applications</span><span class="asg-row-v" id="asg-d-growth">0</span></div>
-        <div class="asg-row"><span class="asg-row-l">Products in pipeline</span><span class="asg-row-v" id="asg-d-products">0</span></div>
+        <div class="asg-ct" style="display:flex;justify-content:space-between;align-items:center">
+          <span>📱 Content Due This Week</span>
+          <button class="asg-abtn" onclick="nav('asg-content',document.querySelector('[onclick*=asg-content]'))" style="font-size:11px;padding:4px 10px">+ Add</button>
+        </div>
+        <div id="asg-content-due"><div class="asg-empty">No content scheduled this week.</div></div>
       </div>
+
+      <!-- OPEN APPLICATIONS -->
       <div class="asg-card">
-        <div class="asg-ct">Quick Actions</div>
+        <div class="asg-ct" style="display:flex;justify-content:space-between;align-items:center">
+          <span>💰 Open Applications & Deadlines</span>
+          <button class="asg-abtn" onclick="nav('asg-growth',document.querySelector('[onclick*=asg-growth]'))" style="font-size:11px;padding:4px 10px">+ Log</button>
+        </div>
+        <div id="asg-open-growth"><div class="asg-empty">No open applications.</div></div>
+      </div>
+
+      <!-- FOLLOW-UPS DUE -->
+      <div class="asg-card">
+        <div class="asg-ct" style="display:flex;justify-content:space-between;align-items:center">
+          <span>🤝 Follow-ups Due</span>
+          <button class="asg-abtn" onclick="nav('asg-people',document.querySelector('[onclick*=asg-people]'))" style="font-size:11px;padding:4px 10px">+ Add</button>
+        </div>
+        <div id="asg-followups"><div class="asg-empty">No follow-ups due.</div></div>
+      </div>
+
+      <!-- ACTIVITY SNAPSHOT -->
+      <div class="asg-card">
+        <div class="asg-ct">Activity This Month</div>
+        <div class="asg-row"><span class="asg-row-l">📱 Content pieces</span><span class="asg-row-v" id="asg-d-content">0</span></div>
+        <div class="asg-row"><span class="asg-row-l">🤝 Active collabs</span><span class="asg-row-v" id="asg-d-people">0</span></div>
+        <div class="asg-row"><span class="asg-row-l">💰 Open applications</span><span class="asg-row-v" id="asg-d-growth">0</span></div>
+        <div class="asg-row"><span class="asg-row-l">🌾 Products in pipeline</span><span class="asg-row-v" id="asg-d-products">0</span></div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="asg-card">
+        <div class="asg-ct">Quick Links</div>
         <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <button class="asg-abtn" onclick="nav('asg-campaigns',document.querySelector('[onclick*=asg-campaigns]'))">📈 Log Campaign</button>
-          <button class="asg-abtn" onclick="nav('asg-content',document.querySelector('[onclick*=asg-content]'))">📱 Add Content</button>
-          <button class="asg-abtn" onclick="nav('asg-orders',document.querySelector('[onclick*=asg-orders]'))">📦 Log Order</button>
-          <button class="asg-abtn" onclick="nav('asg-growth',document.querySelector('[onclick*=asg-growth]'))">💰 Log Application</button>
-          <button class="asg-abtn" onclick="nav('dump',document.querySelector('[onclick*=nav(\'dump\']'))">🗓 Go to Tasks</button>
+          <button class="asg-abtn" onclick="nav('asg-campaigns',document.querySelector('[onclick*=asg-campaigns]'))">📈 Campaigns</button>
+          <button class="asg-abtn" onclick="nav('asg-content',document.querySelector('[onclick*=asg-content]'))">📱 Content</button>
+          <button class="asg-abtn" onclick="nav('asg-orders',document.querySelector('[onclick*=asg-orders]'))">📦 Orders</button>
+          <button class="asg-abtn" onclick="nav('asg-growth',document.querySelector('[onclick*=asg-growth]'))">💰 Growth</button>
           <a href="https://www.notion.so/1de8cb6784f980a79c2af5341f2361d9" target="_blank" style="text-decoration:none"><button class="asg-abtn">📋 Notion OS</button></a>
         </div>
       </div>
+
     </div>
 
     <!-- ════════════ ASG CAMPAIGNS ════════════ -->
@@ -2589,7 +2631,7 @@ setTimeout(runMorningBriefing, 1500);
 // ASG BUSINESS OS — DATA & FUNCTIONS
 // ════════════════════════════════════════════
 
-const ASG_GAS_URL = 'https://script.google.com/macros/s/AKfycbxReBXlIDvqJ8eV_zaykh43-7sexoQjQJZeTg4cLFibIDICTQH2yIF4WYdG9zfFsx9KSQ/exec';
+const ASG_GAS_URL = 'https://script.google.com/macros/s/AKfycbzDI8HQqsZ6lY7bd3kiVnTcsXuR_nNNydKmkKNIsygRHOQPO3dN6qO8yvmyCRjGPqijOg/exec';
 
 // ── ASG DATA (separate localStorage keys) ──
 let asgCampaigns = JSON.parse(localStorage.getItem('asg_campaigns') || '[]');
@@ -2658,77 +2700,115 @@ function getASGLinkedTasks(){
 
 // ── ASG DASHBOARD ──────────────────────────
 function renderASGDashboard(){
-  const mStr=asgThisMonth();
+  const mStr = asgThisMonth();
+  const today = todayStr();
+  const el = id => document.getElementById(id);
 
-  // campaign metrics
-  const mC=asgCampaigns.filter(c=>c.date&&c.date.startsWith(mStr));
-  const mO=asgOrders.filter(o=>o.date&&o.date.startsWith(mStr));
-  const totalRev=mC.reduce((s,c)=>s+c.revenue,0)+mO.reduce((s,o)=>s+o.value,0);
-  const totalSpend=mC.reduce((s,c)=>s+c.adSpend,0);
-  const totalOrders=mC.reduce((s,c)=>s+c.orders,0)+mO.length;
-  const roas=totalSpend>0?Math.round(totalRev/totalSpend*100)/100:0;
-  const totalClicks=mC.reduce((s,c)=>s+c.clicks,0);
-  const convOrders=mC.reduce((s,c)=>s+c.orders,0);
-  const conv=totalClicks>0?Math.round(convOrders/totalClicks*10000)/100:0;
-  const cac=convOrders>0?Math.round(totalSpend/convOrders):0;
-
-  const el=id=>document.getElementById(id);
+  // KPIs
+  const mC = asgCampaigns.filter(c=>c.date&&c.date.startsWith(mStr));
+  const mO = asgOrders.filter(o=>o.date&&o.date.startsWith(mStr));
+  const totalRev   = mC.reduce((s,c)=>s+c.revenue,0)+mO.reduce((s,o)=>s+o.value,0);
+  const totalSpend = mC.reduce((s,c)=>s+c.adSpend,0);
+  const totalOrders= mC.reduce((s,c)=>s+c.orders,0)+mO.length;
+  const roas       = totalSpend>0?Math.round(totalRev/totalSpend*100)/100:0;
+  const totalClicks= mC.reduce((s,c)=>s+c.clicks,0);
+  const convOrders = mC.reduce((s,c)=>s+c.orders,0);
+  const conv       = totalClicks>0?Math.round(convOrders/totalClicks*10000)/100:0;
+  const cac        = convOrders>0?Math.round(totalSpend/convOrders):0;
   if(el('asg-d-revenue')) el('asg-d-revenue').textContent=asgFmtRs(totalRev);
   if(el('asg-d-adspend')) el('asg-d-adspend').textContent=asgFmtRs(totalSpend);
-  if(el('asg-d-roas')) el('asg-d-roas').textContent=roas+'x';
-  if(el('asg-d-orders')) el('asg-d-orders').textContent=asgFmtNum(totalOrders);
-  if(el('asg-d-conv')) el('asg-d-conv').textContent=conv+'%';
-  if(el('asg-d-cac')) el('asg-d-cac').textContent=asgFmtRs(cac);
-
-  // activity counts
-  if(el('asg-d-content')) el('asg-d-content').textContent=asgContent.filter(c=>c.created&&c.created.startsWith(mStr)).length;
-  if(el('asg-d-people')) el('asg-d-people').textContent=asgPeople.filter(p=>p.status==='Active'||p.status==='In Discussion').length;
-  if(el('asg-d-growth')) el('asg-d-growth').textContent=asgGrowth.filter(g=>['Applied','Identified','Application Open'].includes(g.status)).length;
+  if(el('asg-d-roas'))    el('asg-d-roas').textContent=roas+'x';
+  if(el('asg-d-orders'))  el('asg-d-orders').textContent=asgFmtNum(totalOrders);
+  if(el('asg-d-conv'))    el('asg-d-conv').textContent=conv+'%';
+  if(el('asg-d-cac'))     el('asg-d-cac').textContent=asgFmtRs(cac);
+  if(el('asg-d-content'))  el('asg-d-content').textContent=asgContent.filter(c=>c.created&&c.created.startsWith(mStr)).length;
+  if(el('asg-d-people'))   el('asg-d-people').textContent=asgPeople.filter(p=>p.status==='Active'||p.status==='In Discussion').length;
+  if(el('asg-d-growth'))   el('asg-d-growth').textContent=asgGrowth.filter(g=>['Applied','Identified','Application Open'].includes(g.status)).length;
   if(el('asg-d-products')) el('asg-d-products').textContent=asgProducts.filter(p=>p.stage!=='Live'&&p.stage!=='Discontinued').length;
 
-  // channel snapshot
-  const snap=el('asg-channel-snap');
-  if(snap){
-    const channels={};
-    mC.forEach(c=>{
-      if(!channels[c.channel]) channels[c.channel]={rev:0,spend:0,orders:0};
-      channels[c.channel].rev+=c.revenue;
-      channels[c.channel].spend+=c.adSpend;
-      channels[c.channel].orders+=c.orders;
-    });
-    if(!Object.keys(channels).length){
-      snap.innerHTML='<div class="asg-empty">Add campaign data to see channel breakdown.</div>';
+  // Today tasks from Sortd
+  const todayTasksEl = el('asg-today-tasks');
+  if(todayTasksEl){
+    const tasks=(S&&S.tasks?S.tasks:[]).filter(t=>t.status!=='completed'&&getTaskDate(t)===today);
+    if(!tasks.length){
+      todayTasksEl.innerHTML='<div class="asg-empty">No tasks today. <span style="color:var(--amber);cursor:pointer" onclick="nav('dump',document.querySelector('.nav-btn'))">Add one →</span></div>';
     } else {
-      snap.innerHTML=Object.entries(channels).map(([ch,d])=>`
-        <div class="asg-ch-row">
-          <div class="asg-ch-name">${ch}</div>
-          <div class="asg-ch-metrics">
-            <div class="asg-ch-m"><div class="asg-ch-mv">${asgFmtRs(d.rev)}</div><div class="asg-ch-ml">Revenue</div></div>
-            <div class="asg-ch-m"><div class="asg-ch-mv">${d.spend>0?(Math.round(d.rev/d.spend*100)/100)+'x':'—'}</div><div class="asg-ch-ml">ROAS</div></div>
-            <div class="asg-ch-m"><div class="asg-ch-mv">${d.orders}</div><div class="asg-ch-ml">Orders</div></div>
-          </div>
-        </div>
-      `).join('');
+      todayTasksEl.innerHTML=tasks.map(t=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+          <div><div style="font-size:13px;color:var(--text)">${t.title}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">${t.cat||''}${t.sub?' › '+t.sub:''}</div></div>
+          <span class="asg-pill ${t.pri==='high'?'asg-pill-red':t.pri==='medium'?'asg-pill-amber':'asg-pill-blue'}">${t.pri||'low'}</span>
+        </div>`).join('');
     }
   }
 
-  // Sortd linked tasks
-  const linked=el('asg-linked-tasks');
-  if(linked){
-    const tasks=getASGLinkedTasks();
-    if(!tasks.length){
-      linked.innerHTML='<div class="asg-empty">No ASG-tagged tasks in Sortd yet. Add tasks with categories like Content, Collabs, Growth.</div>';
+  // Channel snapshot
+  const snap = el('asg-channel-snap');
+  if(snap){
+    const channels={};
+    mC.forEach(c=>{if(!channels[c.channel])channels[c.channel]={rev:0,spend:0,orders:0};channels[c.channel].rev+=c.revenue;channels[c.channel].spend+=c.adSpend;channels[c.channel].orders+=c.orders;});
+    if(!Object.keys(channels).length){
+      snap.innerHTML='<div class="asg-empty">No campaign data this month.</div>';
     } else {
-      linked.innerHTML=tasks.slice(0,8).map(t=>`
+      snap.innerHTML=Object.entries(channels).map(([ch,d])=>`
+        <div class="asg-ch-row"><div class="asg-ch-name">${ch}</div>
+        <div class="asg-ch-metrics">
+          <div class="asg-ch-m"><div class="asg-ch-mv">${asgFmtRs(d.rev)}</div><div class="asg-ch-ml">Revenue</div></div>
+          <div class="asg-ch-m"><div class="asg-ch-mv">${d.spend>0?(Math.round(d.rev/d.spend*100)/100)+'x':'—'}</div><div class="asg-ch-ml">ROAS</div></div>
+          <div class="asg-ch-m"><div class="asg-ch-mv">${d.orders}</div><div class="asg-ch-ml">Orders</div></div>
+        </div></div>`).join('');
+    }
+  }
+
+  // Content due this week
+  const contentDueEl = el('asg-content-due');
+  if(contentDueEl){
+    const weekEnd=new Date();weekEnd.setDate(weekEnd.getDate()+7);
+    const due=asgContent.filter(c=>c.date&&c.date>=today&&c.date<=weekEnd.toISOString().slice(0,10)&&c.status!=='📤 Posted').sort((a,b)=>a.date.localeCompare(b.date));
+    if(!due.length){contentDueEl.innerHTML='<div class="asg-empty">No content scheduled this week.</div>';}
+    else{
+      const stMap={'💡 Idea':'asg-st-idea','✍ Draft':'asg-st-draft','🎬 Shooting':'asg-st-progress','✂ Editing':'asg-st-progress','✅ Ready':'asg-st-done'};
+      contentDueEl.innerHTML=due.map(c=>`
         <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
-          <div>
-            <div style="font-size:13px;color:var(--text)">${t.title}</div>
-            <div style="font-size:11px;color:var(--dim);margin-top:2px">${t.cat||''}${t.scheduledDate?' · '+t.scheduledDate:''}</div>
+          <div><div style="font-size:13px;color:var(--text)">${c.title}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">${c.type} · ${c.date}</div></div>
+          <span class="asg-st ${stMap[c.status]||'asg-st-idea'}">${c.status}</span>
+        </div>`).join('');
+    }
+  }
+
+  // Open applications
+  const openGrowthEl = el('asg-open-growth');
+  if(openGrowthEl){
+    const open=asgGrowth.filter(g=>['Identified','Application Open','Applied','Shortlisted'].includes(g.status)).sort((a,b)=>(a.deadline||'9999').localeCompare(b.deadline||'9999')).slice(0,5);
+    if(!open.length){openGrowthEl.innerHTML='<div class="asg-empty">No open applications.</div>';}
+    else{
+      openGrowthEl.innerHTML=open.map(g=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+          <div><div style="font-size:13px;color:var(--text)">${g.name}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">${g.type}${g.org?' · '+g.org:''}</div>
+          ${g.deadline?`<div style="font-size:11px;color:${g.deadline<=today?'var(--coral)':'var(--amber)'};margin-top:2px">⏰ ${g.deadline}</div>`:''}</div>
+          <span class="asg-pill ${g.status==='Applied'?'asg-pill-violet':g.status==='Shortlisted'?'asg-pill-amber':'asg-pill-blue'}">${g.status}</span>
+        </div>`).join('');
+    }
+  }
+
+  // Follow-ups due
+  const followupsEl = el('asg-followups');
+  if(followupsEl){
+    const weekEndStr=new Date(Date.now()+7*86400000).toISOString().slice(0,10);
+    const due=asgPeople.filter(p=>p.followup&&p.followup<=weekEndStr).sort((a,b)=>a.followup.localeCompare(b.followup)).slice(0,5);
+    if(!due.length){followupsEl.innerHTML='<div class="asg-empty">No follow-ups due this week.</div>';}
+    else{
+      followupsEl.innerHTML=due.map(p=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
+          <div><div style="font-size:13px;color:var(--text)">${p.name}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">${p.type}${p.contact?' · '+p.contact:''}</div></div>
+          <div style="text-align:right">
+            <div style="font-size:11px;color:${p.followup<=today?'var(--coral)':'var(--amber)'}">📅 ${p.followup}</div>
+            <span class="asg-pill asg-pill-blue">${p.status}</span>
           </div>
-          <span style="font-size:10px;padding:2px 7px;border-radius:5px;background:rgba(255,179,71,0.12);color:var(--amber);border:1px solid rgba(255,179,71,0.2)">${t.priority||'normal'}</span>
-        </div>
-      `).join('')+
-      (tasks.length>8?`<div style="font-size:12px;color:var(--dim);padding:8px 0">+${tasks.length-8} more tasks in Sortd</div>`:'');
+        </div>`).join('');
     }
   }
 }
@@ -2760,7 +2840,7 @@ async function saveCampaign(){
 
   asgCampaigns.push(entry);asgSave('asg_campaigns',asgCampaigns);
   renderCampaignList();
-  showToast('Campaign saved!');asgSetSync('sync-campaign','Saved locally ✓');
+  toast('Campaign saved!','success');asgSetSync('sync-campaign','Saved locally ✓');
   ['c-adspend','c-revenue','c-orders','c-impressions','c-clicks','c-cpc','c-name','c-action']
     .forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   btn.disabled=false;btn.textContent='Save campaign data →';
@@ -2805,7 +2885,7 @@ async function saveContent(){
   const btn=document.getElementById('btn-content');
   btn.disabled=true;btn.textContent='Saving...';
   const title=document.getElementById('ct-title').value.trim();
-  if(!title){showToast('Add a title first',true);btn.disabled=false;btn.textContent='Save content →';return;}
+  if(!title){toast('Add a title first','error');btn.disabled=false;btn.textContent='Save content →';return;}
   const status=asgGetTog('cs')||'💡 Idea';
   const entry={
     id:Date.now().toString(),title,
@@ -2820,7 +2900,7 @@ async function saveContent(){
   };
   asgContent.push(entry);asgSave('asg_content',asgContent);
   renderContentList();
-  showToast('Content saved!');asgSetSync('sync-content','Saved locally ✓');
+  toast('Content saved!','success');asgSetSync('sync-content','Saved locally ✓');
   ['ct-title','ct-date','ct-product','ct-caption','ct-hashtags','ct-link']
     .forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   btn.disabled=false;btn.textContent='Save content →';
@@ -2880,7 +2960,7 @@ async function savePerson(){
   const btn=document.getElementById('btn-people');
   btn.disabled=true;btn.textContent='Saving...';
   const name=document.getElementById('p-name').value.trim();
-  if(!name){showToast('Add a name first',true);btn.disabled=false;btn.textContent='Save person →';return;}
+  if(!name){toast('Add a name first','error');btn.disabled=false;btn.textContent='Save person →';return;}
   const entry={
     id:Date.now().toString(),name,
     type:document.getElementById('p-type').value,
@@ -2895,7 +2975,7 @@ async function savePerson(){
   };
   asgPeople.push(entry);asgSave('asg_people',asgPeople);
   renderPeopleList();
-  showToast('Person saved!');asgSetSync('sync-people','Saved locally ✓');
+  toast('Person saved!','success');asgSetSync('sync-people','Saved locally ✓');
   ['p-name','p-contact','p-followers','p-location','p-notes','p-followup']
     .forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   btn.disabled=false;btn.textContent='Save person →';
@@ -2953,7 +3033,7 @@ async function saveOrder(){
   };
   asgOrders.push(entry);asgSave('asg_orders',asgOrders);
   renderOrdersList();renderOrderSummary();
-  showToast('Order saved!');asgSetSync('sync-orders','Saved locally ✓');
+  toast('Order saved!','success');asgSetSync('sync-orders','Saved locally ✓');
   ['o-value','o-product','o-qty','o-city','o-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   btn.disabled=false;btn.textContent='Save order →';
   try{
@@ -3021,7 +3101,7 @@ async function saveProduct(){
   const btn=document.getElementById('btn-products');
   btn.disabled=true;btn.textContent='Saving...';
   const name=document.getElementById('pr-name').value.trim();
-  if(!name){showToast('Add product name',true);btn.disabled=false;btn.textContent='Save product →';return;}
+  if(!name){toast('Add product name','error');btn.disabled=false;btn.textContent='Save product →';return;}
   const pkg=asgGetTog('pkg')||'Not Started';
   const entry={
     id:Date.now().toString(),name,
@@ -3037,7 +3117,7 @@ async function saveProduct(){
   };
   asgProducts.push(entry);asgSave('asg_products',asgProducts);
   renderProductsList();
-  showToast('Product saved!');asgSetSync('sync-products','Saved locally ✓');
+  toast('Product saved!','success');asgSetSync('sync-products','Saved locally ✓');
   ['pr-name','pr-grain','pr-price','pr-target','pr-link','pr-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   btn.disabled=false;btn.textContent='Save product →';
   try{
@@ -3076,7 +3156,7 @@ async function saveGrowth(){
   const btn=document.getElementById('btn-growth');
   btn.disabled=true;btn.textContent='Saving...';
   const name=document.getElementById('g-name').value.trim();
-  if(!name){showToast('Add opportunity name',true);btn.disabled=false;btn.textContent='Save opportunity →';return;}
+  if(!name){toast('Add opportunity name','error');btn.disabled=false;btn.textContent='Save opportunity →';return;}
   const entry={
     id:Date.now().toString(),name,
     type:document.getElementById('g-type').value,
@@ -3091,7 +3171,7 @@ async function saveGrowth(){
   };
   asgGrowth.push(entry);asgSave('asg_growth',asgGrowth);
   renderGrowthList();
-  showToast('Opportunity saved!');asgSetSync('sync-growth','Saved locally ✓');
+  toast('Opportunity saved!','success');asgSetSync('sync-growth','Saved locally ✓');
   ['g-name','g-org','g-deadline','g-amount','g-link','g-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   btn.disabled=false;btn.textContent='Save opportunity →';
   try{
@@ -3151,7 +3231,7 @@ async function saveWebsite(){
   };
   asgWebsite.push(entry);asgSave('asg_website',asgWebsite);
   renderWebsiteList();renderWebsiteSummary();
-  showToast('Website data saved!');asgSetSync('sync-website','Saved locally ✓');
+  toast('Website data saved!','success');asgSetSync('sync-website','Saved locally ✓');
   ['w-period','w-date','w-sessions','w-users','w-pageviews','w-bounce','w-orders','w-revenue','w-topsource','w-notes']
     .forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   btn.disabled=false;btn.textContent='Save website data →';
@@ -3199,10 +3279,20 @@ function renderWebsiteSummary(){
   if(el('w-avg-bounce'))el('w-avg-bounce').textContent=ab+'%';
 }
 
-// ── HELPER — todayStr ─────────────────────
-function todayStr(){
-  const d=new Date();
-  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+// ── HELPER — use Sortd's existing todayStr ─
+// todayStr() already defined above by Sortd
+
+function asgSaveToSheets(tab, row){
+  if(!ASG_GAS_URL || ASG_GAS_URL.includes('YOUR_')) return Promise.resolve();
+  // POST to URL with params — Apps Script reads from e.parameter not e.postData
+  // This works because URL params survive no-cors mode
+  const params = new URLSearchParams();
+  params.append('tab', tab);
+  params.append('data', JSON.stringify(row));
+  return fetch(ASG_GAS_URL + '?' + params.toString(), {
+    method: 'POST',
+    mode: 'no-cors'
+  }).catch(e => console.log('ASG Sheets error', tab, e));
 }
 </script>
 </body>
