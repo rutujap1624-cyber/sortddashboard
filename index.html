@@ -2731,7 +2731,7 @@ function renderASGDashboard(){
   if(todayTasksEl){
     const tasks=(S&&S.tasks?S.tasks:[]).filter(t=>t.status!=='completed'&&getTaskDate(t)===today);
     if(!tasks.length){
-      todayTasksEl.innerHTML='<div class="asg-empty">No tasks today. <span style="color:var(--amber);cursor:pointer" onclick="nav('dump',document.querySelector('.nav-btn'))">Add one →</span></div>';
+      todayTasksEl.innerHTML='<div class="asg-empty">No tasks today.</div>';
     } else {
       todayTasksEl.innerHTML=tasks.map(t=>`
         <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)">
